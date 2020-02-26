@@ -65,8 +65,28 @@ namespace TestBlackJack
             var dealedCard = deck.DealCard();
             Assert.Equal(dealedCard, firstCard);
         }
-        
 
-        
+        [Fact]
+        public void TestCalculateHand()
+        {
+            List<Card> twoCards = new List<Card> { new Card(Card.Value.Two, Card.Suit.Clubs), new Card(Card.Value.Four, Card.Suit.Hearts) };
+            Hand hand = new Hand(twoCards);
+            hand.CalculateHandSum();
+            Assert.Equal(6, hand.CalculateHandSum());
+        }
+
+        [Fact]
+        public void TestCalculateHandWithAces()
+        {
+            List<Card> AceAsOne = new List<Card> { new Card(Card.Value.Eight, Card.Suit.Clubs), new Card(Card.Value.Seven, Card.Suit.Hearts), new Card(Card.Value.Ace, Card.Suit.Spades)};
+            Hand handOneAce = new Hand(AceAsOne);
+            handOneAce.CalculateHandSum();
+            Assert.Equal(16, handOneAce.CalculateHandSum());
+            
+            List<Card> AceAsEleven = new List<Card> { new Card(Card.Value.Three, Card.Suit.Clubs), new Card(Card.Value.Ace, Card.Suit.Spades)};
+            Hand handElevenAce = new Hand(AceAsEleven);
+            handElevenAce.CalculateHandSum();
+            Assert.Equal(14, handElevenAce.CalculateHandSum());
+        }
     }
 }
