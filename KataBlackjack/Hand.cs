@@ -3,24 +3,23 @@ using System.Collections.Generic;
 
 namespace KataBlackjack
 {
-    public class Hand
+    public class Hand : IHand
     {
-        
-        public List<Card> cardsInHand = new List<Card>();
+        private readonly List<Card> _cardsInHand;
 
         public Hand(List<Card> cardsInHand)
         {
-            this.cardsInHand = cardsInHand;
+            this._cardsInHand = cardsInHand;
         }
         
         public int CalculateHandSum()
         {
             int handSum = 0;
 
-            foreach (var card in this.cardsInHand)
+            foreach (var card in this._cardsInHand)
             {
                 int number;
-                if ((int)card._Value < 12)
+                if ((int)card._Value < 10)
                 {
                     handSum += (int)card._Value;
                 }  

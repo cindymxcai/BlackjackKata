@@ -41,8 +41,8 @@ namespace TestBlackJack
             Deck deck = new Deck();
             Card card = new Card(Card.Value.Two, Card.Suit.Clubs);
             deck.Add();
-            Assert.Equal(52, deck.deckOfCards.Count);
-            Assert.Equal(card, deck.deckOfCards.First());
+            Assert.Equal(52, deck.DeckOfCards.Count);
+            Assert.Equal(card, deck.DeckOfCards.First());
         }
 
         [Fact]
@@ -51,9 +51,9 @@ namespace TestBlackJack
             Deck deck = new Deck();
             deck.Add();
             Card card = new Card(Card.Value.Two, Card.Suit.Clubs);
-            Assert.Equal(card, deck.deckOfCards.First());
-            deck.Shuffle<Card>(deck.deckOfCards);
-            Assert.NotEqual(card, deck.deckOfCards.First());
+            Assert.Equal(card, deck.DeckOfCards.First());
+            deck.Shuffle<Card>(deck.DeckOfCards);
+            Assert.NotEqual(card, deck.DeckOfCards.First());
         }
 
         [Fact]
@@ -61,7 +61,7 @@ namespace TestBlackJack
         {
             Deck deck = new Deck();
             deck.Add();
-            var firstCard = deck.deckOfCards[0];
+            var firstCard = deck.DeckOfCards[0];
             var dealedCard = deck.DealCard();
             Assert.Equal(dealedCard, firstCard);
         }
@@ -73,20 +73,37 @@ namespace TestBlackJack
             Hand hand = new Hand(twoCards);
             hand.CalculateHandSum();
             Assert.Equal(6, hand.CalculateHandSum());
+            
+            List<Card> NonNumberCards = new List<Card> { new Card(Card.Value.Jack, Card.Suit.Clubs), new Card(Card.Value.Two, Card.Suit.Hearts)};
+            Hand handFaceCards = new Hand(NonNumberCards);
+            handFaceCards.CalculateHandSum();
+            Assert.Equal(12, handFaceCards.CalculateHandSum());
         }
 
         [Fact]
         public void TestCalculateHandWithAces()
         {
-            List<Card> AceAsOne = new List<Card> { new Card(Card.Value.Eight, Card.Suit.Clubs), new Card(Card.Value.Seven, Card.Suit.Hearts), new Card(Card.Value.Ace, Card.Suit.Spades)};
-            Hand handOneAce = new Hand(AceAsOne);
+            List<Card> aceAsOne = new List<Card> { new Card(Card.Value.Eight, Card.Suit.Clubs), new Card(Card.Value.Seven, Card.Suit.Hearts), new Card(Card.Value.Ace, Card.Suit.Spades)};
+            Hand handOneAce = new Hand(aceAsOne);
             handOneAce.CalculateHandSum();
             Assert.Equal(16, handOneAce.CalculateHandSum());
             
-            List<Card> AceAsEleven = new List<Card> { new Card(Card.Value.Three, Card.Suit.Clubs), new Card(Card.Value.Ace, Card.Suit.Spades)};
-            Hand handElevenAce = new Hand(AceAsEleven);
+            List<Card> aceAsEleven = new List<Card> { new Card(Card.Value.Three, Card.Suit.Clubs), new Card(Card.Value.Ace, Card.Suit.Spades)};
+            Hand handElevenAce = new Hand(aceAsEleven);
             handElevenAce.CalculateHandSum();
             Assert.Equal(14, handElevenAce.CalculateHandSum());
         }
+
+        [Fact]
+        public void TestForBust()
+        {
+            List<Card> bust = new List<Card> { new Card(Card.Value.Eight, Card.Suit.Clubs), new Card(Card.Value.Seven, Card.Suit.Hearts), new Card(Card.Value.Jack, Card.Suit.Spades)};
+            Hand bustHand = new Hand(bust);
+            bustHand.CalculateHandSum();
+            Player player = new Player();
+            player.CheckForBust(bustHand);
+            Assert.True(player.bust); 
+        }
+        
     }
 }
