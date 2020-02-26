@@ -6,8 +6,9 @@ namespace KataBlackjack
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            
+            Deck deck = new Deck();
+            Console.WriteLine("Welcome to BlackJack!");
+            deck.Add( );
         }
     }
 }
