@@ -19,12 +19,12 @@ namespace KataBlackjack
             foreach (var card in this._cardsInHand)
             {
                 int number;
-                if ((int)card._Value < 10)
+                if ((int)card._Value < (int)Card.Value.Ten)
                 {
                     handSum += (int)card._Value;
                 }  
                 
-                else if (card._Value.ToString() != "Ace")
+                else if (card._Value != Card.Value.Ace)
                 {
                     handSum += 10;
                 }

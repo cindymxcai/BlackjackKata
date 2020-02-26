@@ -5,7 +5,8 @@ namespace KataBlackjack
     public class Player : IPlayer
     {
         private bool playingTurn = true;
-        public bool bust = false;
+        public bool PlayerBust = false;
+        public bool DealerBust = false;
         public void Hit()
         {
             
@@ -16,19 +17,29 @@ namespace KataBlackjack
             
         }
 
-        public void CheckForBust(Hand playerHand)
+        public void CheckForBust(Hand playerHand, Hand dealerHand)
         {
             if (playerHand.CalculateHandSum() > 21)
             {
-                bust = true;
+                PlayerBust = true;
                 Console.WriteLine("You have busted!");
                 Console.WriteLine("With the hand" + playerHand);
             }
+            else if(dealerHand.CalculateHandSum() > 21 )
+            {
+                DealerBust = true;
+                Console.WriteLine("Dealer has busted!");
+                Console.WriteLine("With the hand" + dealerHand);
+            }
+            else
+            {
+                DealerBust = false;
+                PlayerBust = false;
+            }
         }
+        
+        public void CheckForWinner
 
-        public void CheckForWin()
-        {
-            
-        }
+       
     }
 }

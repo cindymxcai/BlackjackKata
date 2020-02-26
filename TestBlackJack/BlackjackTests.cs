@@ -101,8 +101,9 @@ namespace TestBlackJack
             Hand bustHand = new Hand(bust);
             bustHand.CalculateHandSum();
             Player player = new Player();
-            player.CheckForBust(bustHand);
-            Assert.True(player.bust); 
+            player.CheckForBust(bustHand, bustHand);
+            Assert.Equal(25, bustHand.CalculateHandSum());
+            Assert.True(player.PlayerBust); 
         }
         
     }
