@@ -28,25 +28,23 @@ namespace KataBlackjack
         
         public Card TakeTopCard()
         {
-            Add();
-            var card = DeckOfCards.First();
+            Card card = DeckOfCards.First();
             DeckOfCards.Remove(card);
             return card;        
             }
 
         public void Shuffle<Card>( IList<Card> deckOfCards)
         {
-            int n = deckOfCards.Count;
-            while (n > 1)
+            int cardsInDeck = deckOfCards.Count;
+            while (cardsInDeck > 1)
             {
-                n--;
-                int k = Random.Next(n + 1);
-                Card value = deckOfCards[k];
-                deckOfCards[k] = deckOfCards[n];
-                deckOfCards[n] = value;
+                cardsInDeck--;
+                int randomNumber = Random.Next(cardsInDeck + 1);
+                Card value = deckOfCards[randomNumber];
+                deckOfCards[randomNumber] = deckOfCards[cardsInDeck];
+                deckOfCards[cardsInDeck] = value;
             }
         }
         
-       
     }
 }
