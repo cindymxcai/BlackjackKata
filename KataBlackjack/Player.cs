@@ -7,6 +7,9 @@ namespace KataBlackjack
         private bool playingTurn = true;
         public bool PlayerBust = false;
         public bool DealerBust = false;
+        public bool Tied = false;
+        public bool PlayerWin = false;
+        public bool DealerWin = false;
         public void Hit()
         {
             
@@ -37,9 +40,24 @@ namespace KataBlackjack
                 PlayerBust = false;
             }
         }
-        
-        public void CheckForWinner
 
-       
+        public void CheckForWinner(Hand playerHand, Hand dealerHand)
+        {
+            if ((playerHand.CalculateHandSum() == 21) && dealerHand.CalculateHandSum() == 21)
+            {
+                Console.WriteLine("Tied!");
+                Tied = true;
+            }
+            else if (playerHand.CalculateHandSum() == 21 || playerHand.CalculateHandSum() > dealerHand.CalculateHandSum() && playerHand.CalculateHandSum() < 22)
+            {
+                Console.WriteLine("You beat the dealer!");
+                PlayerWin = true;
+            }
+            else if (dealerHand.CalculateHandSum() == 21 || dealerHand.CalculateHandSum() > playerHand.CalculateHandSum() && dealerHand.CalculateHandSum() < 22)
+            {
+                Console.WriteLine("Dealer Wins!");
+                DealerWin = true;
+            }
+        }
     }
 }

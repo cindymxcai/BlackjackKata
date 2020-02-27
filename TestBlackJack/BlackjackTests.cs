@@ -105,6 +105,82 @@ namespace TestBlackJack
             Assert.Equal(25, bustHand.CalculateHandSum());
             Assert.True(player.PlayerBust); 
         }
+
+        [Fact]
+        public void TestForTie()
+        {
+            List<Card> playerCards = new List<Card> { new Card(Card.Value.Jack, Card.Suit.Clubs), new Card(Card.Value.Ace, Card.Suit.Hearts)};
+            List<Card> dealerCards = new List<Card> { new Card(Card.Value.King, Card.Suit.Diamonds), new Card(Card.Value.Ace, Card.Suit.Spades)};
+            Hand playerHand = new Hand(playerCards);
+            Hand dealerHand = new Hand(dealerCards);
+            playerHand.CalculateHandSum();
+            dealerHand.CalculateHandSum();
+            
+            Player player = new Player();
+            player.CheckForWinner(playerHand, dealerHand);
+            Assert.True(player.Tied);
+        }
+
+        [Fact]
+        public void PlayerWin()
+        {
+            List<Card> playerCards = new List<Card> { new Card(Card.Value.Jack, Card.Suit.Clubs), new Card(Card.Value.Nine, Card.Suit.Hearts)};
+            List<Card> dealerCards = new List<Card> { new Card(Card.Value.Three, Card.Suit.Diamonds), new Card(Card.Value.Ace, Card.Suit.Spades)};
+            Hand playerHand = new Hand(playerCards);
+            Hand dealerHand = new Hand(dealerCards);
+            playerHand.CalculateHandSum();
+            dealerHand.CalculateHandSum();
+            
+            Player player = new Player();
+            player.CheckForWinner(playerHand, dealerHand);
+            Assert.True(player.PlayerWin);
+        }
+
+        [Fact]
+        public void PlayerBlackjack()
+        {
+            List<Card> playerCards = new List<Card> { new Card(Card.Value.Jack, Card.Suit.Clubs), new Card(Card.Value.Ace, Card.Suit.Hearts)};
+            List<Card> dealerCards = new List<Card> { new Card(Card.Value.Three, Card.Suit.Diamonds), new Card(Card.Value.Six, Card.Suit.Spades)};
+            Hand playerHand = new Hand(playerCards);
+            Hand dealerHand = new Hand(dealerCards);
+            playerHand.CalculateHandSum();
+            dealerHand.CalculateHandSum();
+            
+            Player player = new Player();
+            player.CheckForWinner(playerHand, dealerHand);
+            Assert.True(player.PlayerWin);
+        }
+
+        [Fact]
+        public void DealerWin()
+        {
+            List<Card> playerCards = new List<Card> { new Card(Card.Value.Two, Card.Suit.Clubs), new Card(Card.Value.Five, Card.Suit.Hearts)};
+            List<Card> dealerCards = new List<Card> { new Card(Card.Value.Ten, Card.Suit.Diamonds), new Card(Card.Value.Six, Card.Suit.Spades)};
+            Hand playerHand = new Hand(playerCards);
+            Hand dealerHand = new Hand(dealerCards);
+            playerHand.CalculateHandSum();
+            dealerHand.CalculateHandSum();
+            
+            Player player = new Player();
+            player.CheckForWinner(playerHand, dealerHand);
+            Assert.True(player.DealerWin);
+        }
+
+        [Fact]
+        public void DealerBlackjack()
+        {
+            List<Card> playerCards = new List<Card> { new Card(Card.Value.Five, Card.Suit.Clubs), new Card(Card.Value.Ace, Card.Suit.Hearts)};
+            List<Card> dealerCards = new List<Card> { new Card(Card.Value.Queen, Card.Suit.Diamonds), new Card(Card.Value.Six, Card.Suit.Spades), new Card(Card.Value.Five, Card.Suit.Hearts)};
+            Hand playerHand = new Hand(playerCards);
+            Hand dealerHand = new Hand(dealerCards);
+            playerHand.CalculateHandSum();
+            dealerHand.CalculateHandSum();
+            
+            Player player = new Player();
+            player.CheckForWinner(playerHand, dealerHand);
+            Assert.True(player.DealerWin);
+        }
+        
         
     }
 }
