@@ -1,24 +1,31 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace KataBlackjack
 {
     public class Hand : IHand
     {
-        private readonly List<Card> _cardsInHand;
+        public List<Card> cardsInHand;
 
         public Hand(List<Card> cardsInHand)
         {
-            this._cardsInHand = cardsInHand;
+            this.cardsInHand = cardsInHand;
         }
         
+       
         public int CalculateHandSum()
         {
-            int handSum = 0;
+            Deck deck = new Deck();
+            deck.Shuffle(deck.DeckOfCards);
 
-            foreach (var card in this._cardsInHand)
+            int handSum = 0;
+            cardsInHand.Add(deck.TakeTopCard());
+            cardsInHand.Add(deck.TakeTopCard());
+            
+            foreach (var card in this.cardsInHand)
             {
-                int number;
                 if ((int)card._Value < (int)Card.Value.Ten)
                 {
                     handSum += (int)card._Value;
@@ -40,5 +47,9 @@ namespace KataBlackjack
 
             return handSum;
         }
+
+       
+
+        
     }
 }

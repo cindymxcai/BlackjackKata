@@ -8,7 +8,8 @@ namespace KataBlackjack
         {
             Deck deck = new Deck();
             Console.WriteLine("Welcome to BlackJack!");
-            deck.Add( );
+            Player player = new Player();
+            player.Play();
         }
     }
 }

@@ -7,6 +7,5 @@ namespace KataBlackjack
         void Add();
         Card TakeTopCard();
         void Shuffle<Card>( IList<Card> deckOfCards);
-        Card DealCard();
     }
 }

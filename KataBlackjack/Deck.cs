@@ -9,25 +9,26 @@ namespace KataBlackjack
     {
         public readonly List<Card> DeckOfCards = new List<Card>();
         private int _currentCard = 0;
-        private static readonly Random Random = new Random();  
-
+        private static readonly Random Random = new Random();
+        private Card dealtCard; 
        
 
         public void Add()
         {
             foreach (Card.Suit s in Enum.GetValues((typeof(Card.Suit))))
             {
-                Console.WriteLine("______________");
+              //  Console.WriteLine("______________");
                 foreach (Card.Value v in Enum.GetValues(typeof(Card.Value)))
                 {
                     DeckOfCards.Add(new Card(v,s));
-                    Console.WriteLine("Suit:" + s + "    Value:" + v);
+                   // Console.WriteLine("Suit:" + s + "    Value:" + v);
                 }
             }
         }
         
         public Card TakeTopCard()
         {
+            Add();
             var card = DeckOfCards.First();
             DeckOfCards.Remove(card);
             return card;        
@@ -46,11 +47,6 @@ namespace KataBlackjack
             }
         }
         
-        public Card DealCard()
-        {
-            
-            return DeckOfCards[_currentCard++];   
-
-        }
+       
     }
 }

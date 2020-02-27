@@ -4,6 +4,5 @@ namespace KataBlackjack
     {
         void Hit();
         void Stay();
-        void CheckForBust(Hand playerHand, Hand dealerHand);
     }
 }

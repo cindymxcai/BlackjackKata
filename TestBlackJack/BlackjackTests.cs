@@ -62,7 +62,7 @@ namespace TestBlackJack
             Deck deck = new Deck();
             deck.Add();
             var firstCard = deck.DeckOfCards[0];
-            var dealedCard = deck.DealCard();
+            var dealedCard = deck.TakeTopCard();
             Assert.Equal(dealedCard, firstCard);
         }
 
@@ -100,10 +100,10 @@ namespace TestBlackJack
             List<Card> bust = new List<Card> { new Card(Card.Value.Eight, Card.Suit.Clubs), new Card(Card.Value.Seven, Card.Suit.Hearts), new Card(Card.Value.Jack, Card.Suit.Spades)};
             Hand bustHand = new Hand(bust);
             bustHand.CalculateHandSum();
-            Player player = new Player();
-            player.CheckForBust(bustHand, bustHand);
+            Game game = new Game();
+            game.CheckForBust(bustHand, bustHand);
             Assert.Equal(25, bustHand.CalculateHandSum());
-            Assert.True(player.PlayerBust); 
+            Assert.True(game.PlayerBust); 
         }
 
         [Fact]
@@ -116,9 +116,9 @@ namespace TestBlackJack
             playerHand.CalculateHandSum();
             dealerHand.CalculateHandSum();
             
-            Player player = new Player();
-            player.CheckForWinner(playerHand, dealerHand);
-            Assert.True(player.Tied);
+            Game game = new Game();
+            game.CheckForWinner(playerHand, dealerHand);
+            Assert.True(game.Tied);
         }
 
         [Fact]
@@ -131,9 +131,9 @@ namespace TestBlackJack
             playerHand.CalculateHandSum();
             dealerHand.CalculateHandSum();
             
-            Player player = new Player();
-            player.CheckForWinner(playerHand, dealerHand);
-            Assert.True(player.PlayerWin);
+            Game game = new Game();
+            game.CheckForWinner(playerHand, dealerHand);
+            Assert.True(game.PlayerWin);
         }
 
         [Fact]
@@ -146,9 +146,9 @@ namespace TestBlackJack
             playerHand.CalculateHandSum();
             dealerHand.CalculateHandSum();
             
-            Player player = new Player();
-            player.CheckForWinner(playerHand, dealerHand);
-            Assert.True(player.PlayerWin);
+            Game game = new Game();
+            game.CheckForWinner(playerHand, dealerHand);
+            Assert.True(game.PlayerWin);
         }
 
         [Fact]
@@ -161,9 +161,9 @@ namespace TestBlackJack
             playerHand.CalculateHandSum();
             dealerHand.CalculateHandSum();
             
-            Player player = new Player();
-            player.CheckForWinner(playerHand, dealerHand);
-            Assert.True(player.DealerWin);
+            Game game = new Game();
+            game.CheckForWinner(playerHand, dealerHand);
+            Assert.True(game.DealerWin);
         }
 
         [Fact]
@@ -176,9 +176,9 @@ namespace TestBlackJack
             playerHand.CalculateHandSum();
             dealerHand.CalculateHandSum();
             
-            Player player = new Player();
-            player.CheckForWinner(playerHand, dealerHand);
-            Assert.True(player.DealerWin);
+            Game game = new Game();
+            game.CheckForWinner(playerHand, dealerHand);
+            Assert.True(game.DealerWin);
         }
         
         

@@ -18,6 +18,7 @@
         <e p="Hand.cs" t="Include" />
         <e p="ICard.cs" t="Include" />
         <e p="IDeck.cs" t="Include" />
+        <e p="IGame.cs" t="Include" />
         <e p="IHand.cs" t="Include" />
         <e p="IPlayer.cs" t="Include" />
         <e p="KataBlackjack.csproj" t="IncludeRecursive" />
