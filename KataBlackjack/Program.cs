@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace KataBlackjack
 {
@@ -6,10 +7,10 @@ namespace KataBlackjack
     {
         static void Main(string[] args)
         {
-            Deck deck = new Deck();
-            Console.WriteLine("Welcome to BlackJack!");
-            Player player = new Player();
-            player.Play();
+            Console.WriteLine("Welcome to Blackjack!");
+            Game game = new Game();
+            var deck = new Deck();
+           
         }
     }
 }

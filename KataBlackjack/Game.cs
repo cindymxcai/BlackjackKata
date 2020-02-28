@@ -10,6 +10,69 @@ namespace KataBlackjack
         public bool Tied = false;
         public bool PlayerWin = false;
         public bool DealerWin = false;
+        private bool _playerTurn = true;
+        private bool _dealerTurn = false;
+        readonly Deck _deck = new Deck();
+
+
+        public void DealCards(Hand playerHand, Hand dealerHand)
+        {
+            playerHand.cardsInHand.Add(_deck.DealTopCard());
+            playerHand.cardsInHand.Add(_deck.DealTopCard());
+
+            dealerHand.cardsInHand.Add(_deck.DealTopCard());
+            dealerHand.cardsInHand.Add(_deck.DealTopCard());
+        }
+        
+        public void Play(Hand playerHand, Hand dealerHand)
+        {
+
+            while (_playerTurn)
+            {
+                Console.WriteLine("You are currently at " + playerHand.CalculateHandSum());
+                Console.WriteLine("with the hand " + playerHand);
+
+                Console.WriteLine("Hit or Stay? (Hit = 1, Stay = 0)");
+                var hitOrStay = Console.ReadLine();
+                
+                CheckForBust(playerHand,dealerHand);
+                CheckForWinner(playerHand, dealerHand);
+
+                if (hitOrStay == "1")
+                {
+                    _playerTurn = true;
+                }
+                else if (hitOrStay == "0")
+                {
+                    _playerTurn = false;
+                    _dealerTurn = true;
+                }
+                else
+                {
+                    Console.WriteLine("invalid input! Try again");
+                    hitOrStay = Console.ReadLine();
+                }
+            }
+
+
+            while (_dealerTurn)
+            {
+                Console.WriteLine("Dealer is currently at " + dealerHand.CalculateHandSum());
+                Console.WriteLine("with the hand " + dealerHand);
+
+                if (dealerHand.CalculateHandSum() < 17)
+                {
+                    var card = _deck.DealTopCard();
+                    Console.WriteLine("Dealer Hit with " + card);
+                    dealerHand.cardsInHand.Add(card);
+                    CheckForBust(playerHand,dealerHand);
+                    CheckForWinner(playerHand, dealerHand);
+                }
+                
+            }
+        }
+        
+        
         public void CheckForBust(Hand playerHand, Hand dealerHand)
         {
             if (playerHand.CalculateHandSum() > 21)

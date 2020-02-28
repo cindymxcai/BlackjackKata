@@ -5,7 +5,7 @@ namespace KataBlackjack
     public interface IDeck
     {
         void Add();
-        Card TakeTopCard();
+        Card DealTopCard();
         void Shuffle<Card>( IList<Card> deckOfCards);
     }
 }

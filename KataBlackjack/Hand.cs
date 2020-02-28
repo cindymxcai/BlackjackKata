@@ -7,7 +7,7 @@ namespace KataBlackjack
 {
     public class Hand : IHand
     {
-        public List<Card> cardsInHand;
+        public  List<Card> cardsInHand;
 
         public Hand(List<Card> cardsInHand)
         {
@@ -21,8 +21,6 @@ namespace KataBlackjack
             deck.Shuffle(deck.DeckOfCards);
 
             int handSum = 0;
-            cardsInHand.Add(deck.TakeTopCard());
-            cardsInHand.Add(deck.TakeTopCard());
             
             foreach (var card in this.cardsInHand)
             {
@@ -47,9 +45,5 @@ namespace KataBlackjack
 
             return handSum;
         }
-
-       
-
-        
     }
 }

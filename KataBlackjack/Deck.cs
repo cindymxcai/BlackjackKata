@@ -8,9 +8,7 @@ namespace KataBlackjack
     public class Deck : IDeck
     {
         public readonly List<Card> DeckOfCards = new List<Card>();
-        private int _currentCard = 0;
         private static readonly Random Random = new Random();
-        private Card dealtCard; 
        
 
         public void Add()
@@ -26,12 +24,12 @@ namespace KataBlackjack
             }
         }
         
-        public Card TakeTopCard()
+        public Card DealTopCard()
         {
             Card card = DeckOfCards.First();
             DeckOfCards.Remove(card);
-            return card;        
-            }
+            return card;
+        }
 
         public void Shuffle<Card>( IList<Card> deckOfCards)
         {

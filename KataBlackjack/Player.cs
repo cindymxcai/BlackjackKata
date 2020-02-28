@@ -5,30 +5,17 @@ namespace KataBlackjack
 {
     public class Player : IPlayer
     {
-        public bool PlayerTurn = true;
-        public bool DealerTurn = false;
 
-
-        public void Play()
+        public Player(Hand hand)
         {
+            
+        }
+        public void HitOrStay()
+        {
+            
+        }
+
     
-            while (PlayerTurn)
-            {
-                Console.WriteLine("You are currently at "   );
-                Console.WriteLine("with the hand "   );
-                
-                PlayerTurn = false;
-            }
-        }
-        public void Hit()
-        {
-            
-        }
-
-        public void Stay()
-        {
-            
-        }
 
         
     }
