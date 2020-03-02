@@ -28,7 +28,7 @@ namespace TestBlackJack
         {
             Deck deck = new Deck();
             Card card = new Card(Card.Value.Two, Card.Suit.Clubs);
-            deck.Add();
+            deck.AddCards();
             Assert.Equal(52, deck.DeckOfCards.Count);
             Assert.Equal(card, deck.DeckOfCards.First());
         }
@@ -37,7 +37,7 @@ namespace TestBlackJack
         public void TestDeckShuffle()
         {
             Deck deck = new Deck();
-            deck.Add();
+            deck.AddCards();
             Card card = new Card(Card.Value.Two, Card.Suit.Clubs);
             Assert.Equal(card, deck.DeckOfCards.First());
             deck.Shuffle<Card>(deck.DeckOfCards);
@@ -48,7 +48,7 @@ namespace TestBlackJack
         public void TestTopCard()
         {
             Deck deck = new Deck();
-            deck.Add();
+            deck.AddCards();
             var firstCard = deck.DeckOfCards[0];
             var dealedCard = deck.DealTopCard();
             Assert.Equal(dealedCard, firstCard);
@@ -62,6 +62,9 @@ namespace TestBlackJack
             deck.DeckOfCards.Add(card);
             Assert.Equal(card,deck.DealTopCard());
 
+            deck.AddCards();
+            deck.DealTopCard();
+            Assert.Equal(51, deck.DeckOfCards.Count);
         }
         
     }

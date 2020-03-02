@@ -17,6 +17,7 @@
         <e p="Deck.cs" t="Include" />
         <e p="Game.cs" t="Include" />
         <e p="Hand.cs" t="Include" />
+        <e p="HitOrStay.cs" t="Include" />
         <e p="ICard.cs" t="Include" />
         <e p="IDealer.cs" t="Include" />
         <e p="IDeck.cs" t="Include" />
@@ -40,6 +41,7 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="BlackjackTests.cs" t="Include" />
         <e p="CardTests.cs" t="Include" />
+        <e p="HandTests.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">

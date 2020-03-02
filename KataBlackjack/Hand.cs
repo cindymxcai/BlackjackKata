@@ -13,6 +13,7 @@ namespace KataBlackjack
         {
             this.cardsInHand = cardsInHand;
         }
+
         
        
         public int CalculateHandSum()

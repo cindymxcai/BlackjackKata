@@ -9,14 +9,19 @@ namespace KataBlackjack
     {
         public readonly List<Card> DeckOfCards = new List<Card>();
         private static readonly Random Random = new Random();
-       
 
-        public void Add()
+
+        public Deck()
         {
-            foreach (Card.Suit s in Enum.GetValues((typeof(Card.Suit))))
+            
+        }
+
+        public void AddCards()
+        {
+            foreach (Suit s in Enum.GetValues((typeof(Card.Suit))))
             {
               //  Console.WriteLine("______________");
-                foreach (Card.Value v in Enum.GetValues(typeof(Card.Value)))
+                foreach (Value v in Enum.GetValues(typeof(Card.Value)))
                 {
                     DeckOfCards.Add(new Card(v,s));
                    // Console.WriteLine("Suit:" + s + "    Value:" + v);
