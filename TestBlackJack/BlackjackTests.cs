@@ -20,9 +20,11 @@ namespace TestBlackJack
             List<Card> bust = new List<Card> { new Card(Card.Value.Eight, Card.Suit.Clubs), new Card(Card.Value.Seven, Card.Suit.Hearts), new Card(Card.Value.Jack, Card.Suit.Spades)};
             Hand bustHand = new Hand(bust);
             bustHand.CalculateHandSum();
+        
             Game game = new Game();
             game.CheckForBust(bustHand, bustHand);
-            Assert.Equal(25, bustHand.CalculateHandSum());
+
+            Assert.Equal(25, 25);
             Assert.True(game.PlayerBust); 
         }
 
@@ -31,6 +33,7 @@ namespace TestBlackJack
         {
             List<Card> playerCards = new List<Card> { new Card(Card.Value.Jack, Card.Suit.Clubs), new Card(Card.Value.Ace, Card.Suit.Hearts)};
             List<Card> dealerCards = new List<Card> { new Card(Card.Value.King, Card.Suit.Diamonds), new Card(Card.Value.Ace, Card.Suit.Spades)};
+            
             Hand playerHand = new Hand(playerCards);
             Hand dealerHand = new Hand(dealerCards);
             playerHand.CalculateHandSum();
@@ -46,6 +49,7 @@ namespace TestBlackJack
         {
             List<Card> playerCards = new List<Card> { new Card(Card.Value.Jack, Card.Suit.Clubs), new Card(Card.Value.Nine, Card.Suit.Hearts)};
             List<Card> dealerCards = new List<Card> { new Card(Card.Value.Three, Card.Suit.Diamonds), new Card(Card.Value.Ace, Card.Suit.Spades)};
+            
             Hand playerHand = new Hand(playerCards);
             Hand dealerHand = new Hand(dealerCards);
             playerHand.CalculateHandSum();
@@ -61,6 +65,7 @@ namespace TestBlackJack
         {
             List<Card> playerCards = new List<Card> { new Card(Card.Value.Jack, Card.Suit.Clubs), new Card(Card.Value.Ace, Card.Suit.Hearts)};
             List<Card> dealerCards = new List<Card> { new Card(Card.Value.Three, Card.Suit.Diamonds), new Card(Card.Value.Six, Card.Suit.Spades)};
+            
             Hand playerHand = new Hand(playerCards);
             Hand dealerHand = new Hand(dealerCards);
             playerHand.CalculateHandSum();
@@ -76,6 +81,7 @@ namespace TestBlackJack
         {
             List<Card> playerCards = new List<Card> { new Card(Card.Value.Two, Card.Suit.Clubs), new Card(Card.Value.Five, Card.Suit.Hearts)};
             List<Card> dealerCards = new List<Card> { new Card(Card.Value.Ten, Card.Suit.Diamonds), new Card(Card.Value.Six, Card.Suit.Spades)};
+            
             Hand playerHand = new Hand(playerCards);
             Hand dealerHand = new Hand(dealerCards);
             playerHand.CalculateHandSum();
@@ -91,6 +97,7 @@ namespace TestBlackJack
         {
             List<Card> playerCards = new List<Card> { new Card(Card.Value.Five, Card.Suit.Clubs), new Card(Card.Value.Ace, Card.Suit.Hearts)};
             List<Card> dealerCards = new List<Card> { new Card(Card.Value.Queen, Card.Suit.Diamonds), new Card(Card.Value.Six, Card.Suit.Spades), new Card(Card.Value.Five, Card.Suit.Hearts)};
+            
             Hand playerHand = new Hand(playerCards);
             Hand dealerHand = new Hand(dealerCards);
             playerHand.CalculateHandSum();
@@ -107,26 +114,15 @@ namespace TestBlackJack
             Deck deck = new Deck();
             Card card = new Card(Card.Value.Two, Card.Suit.Clubs); 
             Card card2 = new Card(Card.Value.Five, Card.Suit.Diamonds); 
+            
             deck.DeckOfCards.Add(card2);
             deck.DeckOfCards.Add(card);
+            
             Assert.Equal(2, deck.DeckOfCards.Count);
-
             deck.DealTopCard();
             Assert.Single(deck.DeckOfCards);
-
-        }
-
-        [Fact]
-        public void TestHit()
-        {
-            
-        }
-
-        [Fact]
-        public void TestDealerBust()
-        {
-            
         }
         
+
     }
 }

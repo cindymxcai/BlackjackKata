@@ -7,7 +7,8 @@ namespace KataBlackjack
     {
         public  Value _Value { get; set; }
         public  Suit _Suit { get; set; }
-
+        
+        
         public Card(Value cardValue, Suit cardSuit)
         {
             this._Value = cardValue;

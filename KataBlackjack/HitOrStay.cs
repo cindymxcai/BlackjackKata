@@ -1,7 +1,7 @@
 namespace KataBlackjack
 {
     public enum HitOrStay{
-        Hit = 1,
-        Stay = 0
+        Hit ,
+        Stay 
     }
 }

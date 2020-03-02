@@ -8,7 +8,9 @@ namespace KataBlackjack
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Blackjack!");
+            Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             Game game = new Game();
+            
             List<Card> playerCards = new List<Card>();
             Hand playerHand = new Hand(playerCards);
             List<Card> dealerCards = new List<Card>();
@@ -16,9 +18,7 @@ namespace KataBlackjack
             
             game.SetUpGame( playerHand,  dealerHand);
             game.Gameloop(playerHand, dealerHand);
-            Player player = new Player(playerHand);
-            Dealer dealer = new Dealer();
-            dealer.dealerHitOrStay(playerHand, dealerHand);
+          
             
         }
     }

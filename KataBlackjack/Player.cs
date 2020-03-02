@@ -14,6 +14,11 @@ namespace KataBlackjack
         {
             Console.WriteLine("\nHit or Stay? (Hit = 1, Stay = 0)"); 
             var response = Console.ReadLine();
+            if (response != "1" && response != "0")
+            {
+                Console.WriteLine("Please enter valid response!");
+                response = Console.ReadLine();
+            }
 
             while (true)
             {
