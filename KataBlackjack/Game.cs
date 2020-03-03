@@ -4,7 +4,6 @@ namespace KataBlackjack
 {
     public class Game : IGame
     {
-        
         public bool PlayerBust = false;
         public bool DealerBust = false;
         public bool Tied = false;
@@ -17,7 +16,7 @@ namespace KataBlackjack
 
         public void SetUpGame(Hand playerHand, Hand dealerHand)
         {
-            deck.AddCards(); 
+            deck.AddCards();
             deck.Shuffle(deck.DeckOfCards);
             playerHand.cardsInHand.Add(deck.DealTopCard());
             playerHand.cardsInHand.Add(deck.DealTopCard());
@@ -31,49 +30,50 @@ namespace KataBlackjack
         {
             while (playerTurn)
             {
-                
-                    Console.WriteLine("You are currently at " + playerHand.CalculateHandSum());
-                    Console.Write("with the hand ");
-                    playerHand.cardsInHand.ForEach(card => Console.Write( "[{0} of {1}], ", card._Value, card._Suit));
-               
-                    Player player = new Player(playerHand);
-                    HitOrStay response = player.PromptMove();
+                Console.WriteLine("You are currently at " + playerHand.CalculateHandSum());
+                Console.Write("with the hand ");
 
-                    if (response == HitOrStay.Hit)
-                    {
-                        playerHand.cardsInHand.Add(deck.DealTopCard());
-                        if (CheckForBust(playerHand, dealerHand))
-                        {
-                            playerTurn = false;
-                        }
-                        CheckForBlackjack(playerHand, dealerHand);
-                    
-                        if (PlayerWin)
-                        {
-                            playerTurn = false;
-                        }
-                    }
-                    
-                    if (response == HitOrStay.Stay)
+                playerHand.cardsInHand.ForEach(card => Console.Write("[{0} of {1}], ", card._Value, card._Suit));
+
+                Console.ResetColor();
+                Player player = new Player(playerHand);
+                HitOrStay response = player.PromptMove();
+
+                if (response == HitOrStay.Hit)
+                {
+                    playerHand.cardsInHand.Add(deck.DealTopCard());
+                    if (CheckForBust(playerHand, dealerHand))
                     {
                         playerTurn = false;
-                        dealerTurn = true;
-                        Console.WriteLine("____________________________________________________________");
-
                     }
+
+                    CheckForBlackjack(playerHand, dealerHand);
+
+                    if (PlayerWin)
+                    {
+                        playerTurn = false;
+                    }
+                }
+
+                if (response == HitOrStay.Stay)
+                {
+                    playerTurn = false;
+                    dealerTurn = true;
+                    Console.WriteLine("____________________________________________________________");
+                }
             }
 
             while (dealerTurn)
             {
-                Console.WriteLine("Dealer is currently at " +dealerHand.CalculateHandSum());
+                Console.WriteLine("Dealer is currently at " + dealerHand.CalculateHandSum());
                 Console.Write("with the hand ");
-                dealerHand.cardsInHand.ForEach(card => Console.Write( "[{0} of {1}], ", card._Value, card._Suit));
+                dealerHand.cardsInHand.ForEach(card => Console.Write("[{0} of {1}], ", card._Value, card._Suit));
                 Console.WriteLine();
                 Player player = new Player(dealerHand);
 
-                if (dealerHand.CalculateHandSum()> playerHand.CalculateHandSum())
+                if (dealerHand.CalculateHandSum() > playerHand.CalculateHandSum())
                 {
-                    Console.WriteLine("Dealer has already won!");
+                    Console.WriteLine("Dealer wins!");
                     playerTurn = false;
                     dealerTurn = false;
                 }
@@ -94,26 +94,25 @@ namespace KataBlackjack
                         {
                             dealerTurn = false;
                         }
+
                         CheckForBlackjack(playerHand, dealerHand);
-                    
+
                         if (DealerWin)
                         {
                             dealerTurn = false;
                         }
                     }
-                    
+
                     if (response == HitOrStay.Stay)
                     {
                         playerTurn = false;
                         dealerTurn = false;
                         CheckForWinner(playerHand, dealerHand);
                     }
-                    
                 }
-
             }
         }
-        
+
         public void DealTopCard(Hand hand)
         {
             hand.cardsInHand.Add(deck.DealTopCard());
@@ -124,19 +123,20 @@ namespace KataBlackjack
             if (playerHand.CalculateHandSum() > 21)
             {
                 PlayerBust = true;
-                Console.WriteLine("You have busted! You are at " +playerHand.CalculateHandSum());
+                Console.WriteLine("You have busted! You are at " + playerHand.CalculateHandSum());
                 Console.WriteLine("With the hand ");
-                playerHand.cardsInHand.ForEach(card => Console.Write( "[{0} of {1}], ", card._Value, card._Suit));
+                playerHand.cardsInHand.ForEach(card => Console.Write("[{0} of {1}], ", card._Value, card._Suit));
                 Console.WriteLine();
                 return true;
             }
-            else if(dealerHand.CalculateHandSum() > 21 )
+            else if (dealerHand.CalculateHandSum() > 21)
             {
                 DealerBust = true;
                 Console.WriteLine("Dealer has busted!");
                 Console.WriteLine("With the hand");
-                dealerHand.cardsInHand.ForEach(card => Console.Write( "[{0} of {1}], ", card._Value, card._Suit));
-                Console.WriteLine("You beat the dealer!");
+                dealerHand.cardsInHand.ForEach(card => Console.Write("[{0} of {1}], ", card._Value, card._Suit));
+                Console.WriteLine("\nYou beat the dealer!");
+                dealerTurn = false;
                 return true;
             }
             else
@@ -147,26 +147,27 @@ namespace KataBlackjack
 
         public bool CheckForWinner(Hand playerHand, Hand dealerHand)
         {
-            if (playerHand.CalculateHandSum() ==  dealerHand.CalculateHandSum())
+            if (playerHand.CalculateHandSum() == dealerHand.CalculateHandSum())
             {
                 Console.WriteLine("Tied!");
                 return true;
             }
-            else if ( playerHand.CalculateHandSum() > dealerHand.CalculateHandSum() && playerHand.CalculateHandSum() < 22)
+            else if (playerHand.CalculateHandSum() > dealerHand.CalculateHandSum() &&
+                     playerHand.CalculateHandSum() < 22)
             {
                 Console.WriteLine("You beat the dealer!");
                 return true;
             }
-            else if ( dealerHand.CalculateHandSum() > playerHand.CalculateHandSum() && dealerHand.CalculateHandSum() < 22)
+            else if (dealerHand.CalculateHandSum() > playerHand.CalculateHandSum() &&
+                     dealerHand.CalculateHandSum() < 22)
             {
                 Console.Write("Dealer Wins! With the hand ");
-                dealerHand.cardsInHand.ForEach(card => Console.Write( "[{0} of {1}], ", card._Value, card._Suit));
+                dealerHand.cardsInHand.ForEach(card => Console.Write("[{0} of {1}], ", card._Value, card._Suit));
                 return true;
             }
             else
             {
                 return false;
-
             }
         }
 
@@ -176,7 +177,6 @@ namespace KataBlackjack
             {
                 Console.WriteLine("You got Blackjack!");
             }
-            
         }
     }
 }
