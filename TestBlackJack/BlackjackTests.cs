@@ -26,10 +26,10 @@ namespace TestBlackJack
             bustHand.CalculateHandSum();
 
             Game game = new Game();
-            game.CheckForBust(bustHand, bustHand);
+            game.IsBust(bustHand, bustHand);
 
             Assert.Equal(25, 25);
-            Assert.True(game.PlayerBust);
+            Assert.True(game.IsPlayerBust);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace TestBlackJack
 
             Game game = new Game();
             game.CheckForWinner(playerHand, dealerHand);
-            Assert.True(game.Tied);
+            Assert.True(game.IsTied);
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace TestBlackJack
 
             Game game = new Game();
             game.CheckForWinner(playerHand, dealerHand);
-            Assert.True(game.PlayerWin);
+            Assert.True(game.IsPlayerWin);
         }
 
         [Fact]
@@ -83,7 +83,7 @@ namespace TestBlackJack
 
             Game game = new Game();
             game.CheckForWinner(playerHand, dealerHand);
-            Assert.True(game.PlayerWin);
+            Assert.True(game.IsPlayerWin);
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace TestBlackJack
 
             Game game = new Game();
             game.CheckForWinner(playerHand, dealerHand);
-            Assert.True(game.DealerWin);
+            Assert.True(game.IsDealerWin);
         }
 
         [Fact]
@@ -122,7 +122,7 @@ namespace TestBlackJack
 
             Game game = new Game();
             game.CheckForWinner(playerHand, dealerHand);
-            Assert.True(game.DealerWin);
+            Assert.True(game.IsDealerWin);
         }
 
         [Fact]
