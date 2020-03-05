@@ -175,7 +175,7 @@ namespace KataBlackjack
         {
             if (playerHand.CalculateHandSum() == 21)
             {
-                Console.WriteLine("You got Blackjack!");
+                Console.WriteLine("You won Blackjack!");
             }
         }
     }
