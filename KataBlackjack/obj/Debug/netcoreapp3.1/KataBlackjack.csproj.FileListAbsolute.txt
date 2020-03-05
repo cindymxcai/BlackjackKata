@@ -1,4 +1,3 @@
-/Users/cindy.cai/RiderProjects/KataBlackjack/KataBlackjack/bin/Debug/netcoreapp3.1/KataBlackjack
 /Users/cindy.cai/RiderProjects/KataBlackjack/KataBlackjack/bin/Debug/netcoreapp3.1/KataBlackjack.deps.json
 /Users/cindy.cai/RiderProjects/KataBlackjack/KataBlackjack/bin/Debug/netcoreapp3.1/KataBlackjack.runtimeconfig.json
 /Users/cindy.cai/RiderProjects/KataBlackjack/KataBlackjack/bin/Debug/netcoreapp3.1/KataBlackjack.runtimeconfig.dev.json
