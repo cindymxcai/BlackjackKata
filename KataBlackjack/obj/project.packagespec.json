@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/Users/cindy.cai/RiderProjects/KataBlackjack/KataBlackjack/KataBlackjack.csproj",
+    "projectUniqueName": "/Users/cindy.cai/Desktop/RiderProjects/KataBlackjack/KataBlackjack/KataBlackjack.csproj",
     "projectName": "KataBlackjack",
-    "projectPath": "/Users/cindy.cai/RiderProjects/KataBlackjack/KataBlackjack/KataBlackjack.csproj",
-    "outputPath": "/Users/cindy.cai/RiderProjects/KataBlackjack/KataBlackjack/obj/",
+    "projectPath": "/Users/cindy.cai/Desktop/RiderProjects/KataBlackjack/KataBlackjack/KataBlackjack.csproj",
+    "outputPath": "/Users/cindy.cai/Desktop/RiderProjects/KataBlackjack/KataBlackjack/obj/",
     "projectStyle": "PackageReference",
     "originalTargetFrameworks": [
       "netcoreapp3.1"

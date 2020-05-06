@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/Users/cindy.cai/RiderProjects/KataBlackjack/TestBlackJack/TestBlackJack.csproj",
+    "projectUniqueName": "/Users/cindy.cai/Desktop/RiderProjects/KataBlackjack/TestBlackJack/TestBlackJack.csproj",
     "projectName": "TestBlackJack",
-    "projectPath": "/Users/cindy.cai/RiderProjects/KataBlackjack/TestBlackJack/TestBlackJack.csproj",
-    "outputPath": "/Users/cindy.cai/RiderProjects/KataBlackjack/TestBlackJack/obj/",
+    "projectPath": "/Users/cindy.cai/Desktop/RiderProjects/KataBlackjack/TestBlackJack/TestBlackJack.csproj",
+    "outputPath": "/Users/cindy.cai/Desktop/RiderProjects/KataBlackjack/TestBlackJack/obj/",
     "projectStyle": "PackageReference",
     "originalTargetFrameworks": [
       "netcoreapp3.1"
@@ -15,8 +15,8 @@
     "frameworks": {
       "netcoreapp3.1": {
         "projectReferences": {
-          "/Users/cindy.cai/RiderProjects/KataBlackjack/KataBlackjack/KataBlackjack.csproj": {
-            "projectPath": "/Users/cindy.cai/RiderProjects/KataBlackjack/KataBlackjack/KataBlackjack.csproj"
+          "/Users/cindy.cai/Desktop/RiderProjects/KataBlackjack/KataBlackjack/KataBlackjack.csproj": {
+            "projectPath": "/Users/cindy.cai/Desktop/RiderProjects/KataBlackjack/KataBlackjack/KataBlackjack.csproj"
           }
         }
       }
