@@ -1,7 +1,3 @@
-
-using System;
-using Moq;
-
 namespace Blackjack
 {
     public static class Program

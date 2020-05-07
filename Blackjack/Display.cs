@@ -19,8 +19,8 @@ namespace Blackjack
                 {
                     Console.Write($"[{card.CardValue} , {card.CardSuit} ]");
                 }
-
             }
+
             Console.WriteLine("]");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("Hit or stay? (Hit = 1, Stay = 0)");
@@ -42,15 +42,16 @@ namespace Blackjack
                 {
                     Console.Write($"[{card.CardValue} , {card.CardSuit} ]");
                 }
-
             }
+
             Console.WriteLine("]");
         }
+
         public static void PlayerHitCard(Card card)
         {
             Console.WriteLine($"You draw [{card.CardValue} , {card.CardSuit}]");
         }
-        
+
         public static void DealerHitCard(Card card)
         {
             Console.WriteLine($"You draw [{card.CardValue} , {card.CardSuit}]");
@@ -71,8 +72,8 @@ namespace Blackjack
                 {
                     Console.Write($"[{card.CardValue} , {card.CardSuit} ]");
                 }
-
             }
+
             Console.WriteLine("]");
         }
 
@@ -91,15 +92,14 @@ namespace Blackjack
                 {
                     Console.Write($"[{card.CardValue} , {card.CardSuit} ]");
                 }
-
             }
+
             Console.WriteLine("]");
         }
 
         public static void PlayerWin()
         {
             Console.WriteLine("Player WON!");
-            
         }
 
         public static void DealerWins()

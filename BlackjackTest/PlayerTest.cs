@@ -28,7 +28,7 @@ namespace BlackjackTest
             mock.Setup(reader => reader.GetInput()).Returns(input);
             var hand = new Hand();
             var player = new Player( hand, mock.Object );
-            Assert.Equal(response, player.getResponse());
+            Assert.Equal(response, player.GetResponse());
         }
 
         [Fact]
@@ -38,7 +38,7 @@ namespace BlackjackTest
             var mock = new Mock<IConsoleReader>();
             mock.SetupSequence(reader => reader.GetInput()).Returns("10");
             var player = new Player( hand, mock.Object );
-            Assert.Equal(Response.Invalid, player.getResponse());
+            Assert.Equal(Response.Invalid, player.GetResponse());
         }
 
         [Fact]

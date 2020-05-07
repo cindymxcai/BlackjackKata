@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Blackjack;
 using Moq;
@@ -63,8 +62,8 @@ namespace BlackjackTest
             blackjack.SetUpGame();
             blackjack.PlayGame();
             Assert.True(player.HasBusted(player));
-            Assert.False(blackjack._isPlayingGame);
-            Assert.False(blackjack._isPlayerTurn);
+            Assert.False(blackjack.IsPlayingGame);
+            Assert.False(blackjack.IsPlayerTurn);
         }
 
         [Fact]
@@ -85,7 +84,7 @@ namespace BlackjackTest
             playerHand.CardsInHand = cards;
             blackjack.PlayGame();
             Assert.Equal(21, player.PlayerHand.CalculateHandSum());
-            Assert.False(blackjack._isPlayerTurn);
+            Assert.False(blackjack.IsPlayerTurn);
             Assert.True(player.HasBlackJack(player));
         }
     }

@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 
 namespace Blackjack
 {
@@ -8,9 +7,9 @@ namespace Blackjack
         private readonly IPlayer _player;
         private readonly IDealer _dealer;
         public readonly IDeck Deck;
-        public bool _isPlayingGame = true;
-        public bool _isDealerTurn;
-        public bool _isPlayerTurn = true;
+        public bool IsPlayingGame = true;
+        private bool _isDealerTurn;
+        public bool IsPlayerTurn = true;
 
         public BlackjackGame(IPlayer player, IDealer dealer, IDeck deck)
         {
@@ -18,44 +17,39 @@ namespace Blackjack
             _dealer = dealer;
             Deck = deck;
         }
+
         public void SetUpGame()
         {
             _dealer.ShuffleCards(Deck.DeckOfCards);
-           _player.PlayerHand.CardsInHand.Add(_dealer.DealCard(Deck.DeckOfCards));
-           _player.PlayerHand.CardsInHand.Add(_dealer.DealCard(Deck.DeckOfCards));
-           _dealer.DealerHand.CardsInHand.Add(_dealer.DealCard(Deck.DeckOfCards));
-           _dealer.DealerHand.CardsInHand.Add(_dealer.DealCard(Deck.DeckOfCards));
+            _player.PlayerHand.CardsInHand.Add(_dealer.DealCard(Deck.DeckOfCards));
+            _player.PlayerHand.CardsInHand.Add(_dealer.DealCard(Deck.DeckOfCards));
+            _dealer.DealerHand.CardsInHand.Add(_dealer.DealCard(Deck.DeckOfCards));
+            _dealer.DealerHand.CardsInHand.Add(_dealer.DealCard(Deck.DeckOfCards));
         }
 
         public void PlayGame()
         {
-
-            while (_isPlayingGame)
+            while (IsPlayingGame)
             {
-                while (_isPlayerTurn )
+                while (IsPlayerTurn)
                 {
                     if (_player.HasBusted(_player))
                     {
-                        _isPlayerTurn = false;
-                        _isPlayingGame = false;
+                        IsPlayerTurn = false;
+                        IsPlayingGame = false;
                     }
-
                     else if (_player.HasBlackJack(_player))
                     {
-                        _isPlayerTurn = false;
+                        IsPlayerTurn = false;
                         _isDealerTurn = true;
                     }
                     else
                     {
-                        
                         Display.PlayerPrompt(_player);
-
-                        var response = _player.getResponse();
-
-
+                        var response = _player.GetResponse();
                         if (response == Response.Stay)
                         {
-                            _isPlayerTurn = false;
+                            IsPlayerTurn = false;
                             _isDealerTurn = true;
                         }
                         else
@@ -64,11 +58,11 @@ namespace Blackjack
                         }
                     }
                 }
+
                 Console.WriteLine("______________________");
                 while (_isDealerTurn)
                 {
                     Display.DealerTurn(_dealer);
-
                     try
                     {
                         _dealer.Hit(Deck);
@@ -77,11 +71,9 @@ namespace Blackjack
                     {
                         Console.WriteLine(dealerOver17Exception.Message);
                         _isDealerTurn = false;
-                        _isPlayingGame = false;
+                        IsPlayingGame = false;
                     }
-
-                } 
-
+                }
 
                 FindWinner();
             }
@@ -97,23 +89,26 @@ namespace Blackjack
             {
                 Display.PlayerWin();
             }
-            else if( _player.HasBlackJack(_player) && _dealer.DealerHand.CalculateHandSum() == 21) //if both get blackjack -> draw
+            else if (_player.HasBlackJack(_player) && _dealer.DealerHand.CalculateHandSum() == 21
+            ) //if both get blackjack -> draw
             {
                 Display.Draw();
             }
-            else//if neither gets blackjack or bust
+            else //if neither gets blackjack or bust
             {
-                if (_player.PlayerHand.CalculateHandSum() > _dealer.DealerHand.CalculateHandSum() && _dealer.DealerHand.CalculateHandSum() <= 21 ) //if player is closer to 21 -> player wins
+                if (_player.PlayerHand.CalculateHandSum() > _dealer.DealerHand.CalculateHandSum() &&
+                    _dealer.DealerHand.CalculateHandSum() <= 21) //if player is closer to 21 -> player wins
                 {
                     Display.PlayerWin();
                 }
-                else if (_player.PlayerHand.CalculateHandSum() < _dealer.DealerHand.CalculateHandSum() && _dealer.DealerHand.CalculateHandSum() <= 21) //if dealer is closer -> dealer wins
+                else if (_player.PlayerHand.CalculateHandSum() < _dealer.DealerHand.CalculateHandSum() &&
+                         _dealer.DealerHand.CalculateHandSum() <= 21) //if dealer is closer -> dealer wins
                 {
                     Display.DealerWins();
                 }
             }
-            
         }
+
         private void PlayerHit()
         {
             var card = _dealer.DealCard(Deck.DeckOfCards);

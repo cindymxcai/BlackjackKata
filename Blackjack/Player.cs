@@ -11,7 +11,7 @@ namespace Blackjack
             _consoleReader = consoleReader;
         }
 
-        public Response getResponse()
+        public Response GetResponse()
         {
             var input = _consoleReader.GetInput();
             return input == "1" ? Response.Hit :
