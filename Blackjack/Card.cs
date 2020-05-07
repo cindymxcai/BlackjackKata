@@ -1,4 +1,4 @@
-namespace BlackjackTest
+namespace Blackjack
 {
     public class Card
     {        
@@ -10,8 +10,6 @@ namespace BlackjackTest
             CardValue = value;
             CardSuit = suit;
         }
-
         
-
     }
 }

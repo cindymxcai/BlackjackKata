@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using BlackjackTest;
 
 namespace Blackjack
 {
-    public class Deck
+    public class Deck : IDeck
     {
         public List<Card> DeckOfCards { get; } = new List<Card>();
         public Deck()
