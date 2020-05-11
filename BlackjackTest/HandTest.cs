@@ -18,7 +18,7 @@ namespace BlackjackTest
         {
             var twoCards = new List<Card> {new Card("3", "SPADES"), new Card("5", "HEARTS")};
             var hand = new Hand {CardsInHand = twoCards};
-            Assert.Equal(8, hand.CalculateHandSum());
+            Assert.Equal(8, hand.CalculateScore());
         }
 
         [Fact]
@@ -26,7 +26,7 @@ namespace BlackjackTest
         {
             var cards = new List<Card>{new Card("KING", "DIAMONDS"), new Card("2", "HEARTS"), new Card("5", "CLUBS")};
             var hand = new Hand {CardsInHand = cards};
-            Assert.Equal(17, hand.CalculateHandSum());
+            Assert.Equal(17, hand.CalculateScore());
             
         }
 
@@ -35,7 +35,7 @@ namespace BlackjackTest
         {
             var cards = new List<Card>{new Card("3", "DIAMONDS"), new Card("2", "HEARTS"), new Card("ACE", "CLUBS")};
             var hand = new Hand {CardsInHand = cards};
-            Assert.Equal(16, hand.CalculateHandSum());
+            Assert.Equal(16, hand.CalculateScore());
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace BlackjackTest
             var cards = new List<Card>{new Card("3", "DIAMONDS"), new Card("2", "HEARTS"), new Card("9", "CLUBS")};
             var hand = new Hand { CardsInHand =  cards};
             hand.CardsInHand.Add(new Card("ACE", "CLUBS"));
-            var sum =  hand.CalculateHandSum();
+            var sum =  hand.CalculateScore();
             Assert.Equal(15, sum);
         }
     }

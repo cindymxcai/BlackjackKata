@@ -7,14 +7,19 @@ namespace Blackjack
     public class Dealer : IDealer
     {
         private readonly IRng _rng;
-        public Hand DealerHand { get; }
-
-        public Dealer(Hand hand, IRng rng)
+        public Hand hand { get; }
+        public Dealer(Hand _hand, IRng rng)
         {
             _rng = rng;
-            DealerHand = hand;
+            hand = _hand;
         }
 
+        public void ReceiveCard(Card dealtCard)
+        {
+            hand.CardsInHand.Add(dealtCard);
+        }
+
+       
         public void ShuffleCards(List<Card> deckOfCards)
         {
             var cardsInDeck = deckOfCards.Count;
@@ -33,21 +38,36 @@ namespace Blackjack
             var card = deckOfCards.First();
             deckOfCards.Remove(card);
             return card;
-
         }
 
         public void Hit(IDeck deck)
         {
-            if (DealerHand.CalculateHandSum() < 17)
+            if (hand.CalculateScore() < 17)
             {
-                var card = DealCard(deck.DeckOfCards);
-                DealerHand.CardsInHand.Add(card);
-                Display.DealerHitCard(card);
+                var dealtCard = DealCard(deck.DeckOfCards);
+                ReceiveCard(dealtCard); 
+                Display.DealerHitCard(dealtCard);
             }
             else
             {
                 throw new DealerOver17Exception("Dealer is staying");
             }
+        }
+
+        public bool HasBlackJack()
+        {
+            if (!hand.HasBlackJack()) return false;
+            //Display.Blackjack();
+            Console.WriteLine("Dealer has blackjack!");
+            return true;
+        }
+
+        public bool HasBusted()
+        {
+            if (!hand.HasBusted()) return false;
+            //Display.Bust(this);
+            Console.WriteLine("Dealer has busted!");
+            return true;
         }
     }
 
@@ -56,5 +76,6 @@ namespace Blackjack
         public DealerOver17Exception(string message) : base(message)
         {
         }
+        
     }
 }

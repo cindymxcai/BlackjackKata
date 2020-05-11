@@ -6,8 +6,8 @@ namespace Blackjack
     {
         public static void PlayerPrompt(IPlayer player)
         {
-            Console.Write($"You are at currently at {player.PlayerHand.CalculateHandSum()}\n with the hand [");
-            foreach (var card in player.PlayerHand.CardsInHand)
+            Console.Write($"You are at currently at {player.hand.CalculateScore()}\n with the hand [");
+            foreach (var card in player.hand.CardsInHand)
             {
                 if (card.CardSuit == "HEARTS" || card.CardSuit == "DIAMONDS")
                 {
@@ -29,8 +29,8 @@ namespace Blackjack
 
         public static void DealerTurn(IDealer dealer)
         {
-            Console.Write($"Dealer is currently at {dealer.DealerHand.CalculateHandSum()}\n with the hand [");
-            foreach (var card in dealer.DealerHand.CardsInHand)
+            Console.Write($"Dealer is currently at {dealer.hand.CalculateScore()}\n with the hand [");
+            foreach (var card in dealer.hand.CardsInHand)
             {
                 if (card.CardSuit == "HEARTS" || card.CardSuit == "DIAMONDS")
                 {
@@ -47,20 +47,20 @@ namespace Blackjack
             Console.WriteLine("]");
         }
 
-        public static void PlayerHitCard(Card card)
+        public static void HitCard(Card card)
         {
-            Console.WriteLine($"You draw [{card.CardValue} , {card.CardSuit}]");
+            Console.WriteLine($"HIT [{card.CardValue} , {card.CardSuit}]");
         }
 
         public static void DealerHitCard(Card card)
         {
             Console.WriteLine($"You draw [{card.CardValue} , {card.CardSuit}]");
-        }
+        }  
 
         public static void Blackjack(IPlayer player)
         {
-            Console.Write("Player has Blackjack! With hand");
-            foreach (var card in player.PlayerHand.CardsInHand)
+            Console.Write("Blackjack! With hand");
+            foreach (var card in player.hand.CardsInHand)
             {
                 if (card.CardSuit == "HEARTS" || card.CardSuit == "DIAMONDS")
                 {
@@ -79,8 +79,8 @@ namespace Blackjack
 
         public static void Bust(IPlayer player)
         {
-            Console.WriteLine("Player has Busted! With hand");
-            foreach (var card in player.PlayerHand.CardsInHand)
+            Console.WriteLine("Busted! With hand");
+            foreach (var card in player.hand.CardsInHand)
             {
                 if (card.CardSuit == "HEARTS" || card.CardSuit == "DIAMONDS")
                 {

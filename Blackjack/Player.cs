@@ -3,11 +3,11 @@ namespace Blackjack
     public class Player : IPlayer
     {
         private readonly IConsoleReader _consoleReader;
-        public Hand PlayerHand { get; }
-
-        public Player(Hand hand, IConsoleReader consoleReader)
+        public Hand hand { get; }
+        
+        public Player(Hand _hand, IConsoleReader consoleReader)
         {
-            PlayerHand = hand;
+            hand = _hand;
             _consoleReader = consoleReader;
         }
 
@@ -18,18 +18,23 @@ namespace Blackjack
                 input == "0" ? Response.Stay : Response.Invalid;
         }
 
-        public bool HasBlackJack(IPlayer player)
+        public bool HasBlackJack()
         {
-            if (PlayerHand.CalculateHandSum() != 21) return false;
-            Display.Blackjack(player);
+            if (!hand.HasBlackJack()) return false;
+            Display.Blackjack(this);
             return true;
         }
 
-        public bool HasBusted(IPlayer player)
+        public bool HasBusted()
         {
-            if (PlayerHand.CalculateHandSum() <= 21) return false;
-            Display.Bust(player);
+            if (!hand.HasBusted()) return false;
+            Display.Bust(this);
             return true;
+        }
+
+        public void ReceiveCard(Card dealtCard)
+        {
+            hand.CardsInHand.Add(dealtCard);
         }
     }
 }

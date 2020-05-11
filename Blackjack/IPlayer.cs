@@ -2,9 +2,10 @@ namespace Blackjack
 {
     public interface IPlayer
     {
-        Hand PlayerHand { get; }
+        Hand hand { get; }
+        void ReceiveCard(Card dealtCard);
+        bool HasBlackJack();
+        bool HasBusted();
         Response GetResponse();
-        bool HasBlackJack(IPlayer player);
-        bool HasBusted(IPlayer player);
     }
 }

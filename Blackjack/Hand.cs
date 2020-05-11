@@ -11,33 +11,43 @@ namespace Blackjack
             CardsInHand = new List<Card>();
         }
 
-        public int CalculateHandSum()
+        public int CalculateScore()
         {
-            var handSum = 0;
+            var score = 0;
             foreach (var card in CardsInHand)
             {
                 if (int.TryParse(card.CardValue, out _))
                 {
-                    handSum += int.Parse(card.CardValue);
+                    score += int.Parse(card.CardValue);
                 }
                 else
                 {
                     if (card.CardValue != "ACE")
                     {
-                        handSum += 10;
+                        score += 10;
                     }
-                    else if (handSum <= 10)
+                    else if (score <= 10)
                     {
-                        handSum += 11;
+                        score += 11;
                     }
                     else
                     {
-                        handSum += 1;
+                        score += 1;
                     }
                 }
             }
 
-            return handSum;
+            return score;
+        }
+        
+        public bool HasBlackJack()
+        {
+            return CalculateScore() == 21;
+        }
+
+        public bool HasBusted()
+        {
+            return CalculateScore() > 21;
         }
     }
 }

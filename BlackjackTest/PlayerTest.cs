@@ -14,7 +14,7 @@ namespace BlackjackTest
             var mock = new Mock<IConsoleReader>();
             mock.Setup(reader => reader.GetInput()).Returns("0");
             var player = new Player(hand, mock.Object);
-            Assert.Equal(0, player.PlayerHand.CardsInHand.Count);
+            Assert.Equal(0, player.hand.CardsInHand.Count);
         }
 
 
@@ -30,7 +30,7 @@ namespace BlackjackTest
             var player = new Player( hand, mock.Object );
             Assert.Equal(response, player.GetResponse());
         }
-
+        
         [Fact]
         public void PlayerShouldKeepGettingInputIfInvalid()
         {
@@ -42,7 +42,6 @@ namespace BlackjackTest
         }
 
         [Fact]
-
         public void PlayerHasBlackJackIfHandEquals21()
         {
             var cards = new List<Card>{new Card("8", "DIAMONDS"), new Card("QUEEN", "HEARTS"), new Card("3", "CLUBS")};
@@ -50,7 +49,7 @@ namespace BlackjackTest
             mock.SetupSequence(reader => reader.GetInput()).Returns("0");
             var hand = new Hand { CardsInHand =  cards};
             var player = new Player(hand, mock.Object);
-            Assert.True(player.HasBlackJack(player));
+            Assert.True(player.HasBlackJack());
         }
 
         [Fact]
@@ -61,7 +60,7 @@ namespace BlackjackTest
             mock.SetupSequence(reader => reader.GetInput()).Returns("0");
             var hand = new Hand { CardsInHand =  cards};
             var player = new Player(hand, mock.Object);
-            Assert.True(player.HasBusted(player));
+            Assert.True(player.HasBusted());
         }
     }
 }

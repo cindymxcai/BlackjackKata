@@ -8,7 +8,7 @@ namespace Blackjack
         private readonly IDealer _dealer;
         public readonly IDeck Deck;
         public bool IsPlayingGame = true;
-        private bool _isDealerTurn;
+        public bool IsDealerTurn;
         public bool IsPlayerTurn = true;
 
         public BlackjackGame(IPlayer player, IDealer dealer, IDeck deck)
@@ -21,88 +21,98 @@ namespace Blackjack
         public void SetUpGame()
         {
             _dealer.ShuffleCards(Deck.DeckOfCards);
-            _player.PlayerHand.CardsInHand.Add(_dealer.DealCard(Deck.DeckOfCards));
-            _player.PlayerHand.CardsInHand.Add(_dealer.DealCard(Deck.DeckOfCards));
-            _dealer.DealerHand.CardsInHand.Add(_dealer.DealCard(Deck.DeckOfCards));
-            _dealer.DealerHand.CardsInHand.Add(_dealer.DealCard(Deck.DeckOfCards));
+            _player.ReceiveCard(_dealer.DealCard(Deck.DeckOfCards));
+            _player.ReceiveCard(_dealer.DealCard(Deck.DeckOfCards));
+            _dealer.ReceiveCard(_dealer.DealCard(Deck.DeckOfCards));
+            _dealer.ReceiveCard(_dealer.DealCard(Deck.DeckOfCards));
         }
 
         public void PlayGame()
         {
+            SetUpGame();
+
             while (IsPlayingGame)
             {
                 while (IsPlayerTurn)
                 {
-                    if (_player.HasBusted(_player))
-                    {
-                        IsPlayerTurn = false;
-                        IsPlayingGame = false;
-                    }
-                    else if (_player.HasBlackJack(_player))
-                    {
-                        IsPlayerTurn = false;
-                        _isDealerTurn = true;
-                    }
-                    else
-                    {
-                        Display.PlayerPrompt(_player);
-                        var response = _player.GetResponse();
-                        if (response == Response.Stay)
-                        {
-                            IsPlayerTurn = false;
-                            _isDealerTurn = true;
-                        }
-                        else
-                        {
-                            PlayerHit();
-                        }
-                    }
+                    PlayPlayersTurn();
                 }
 
                 Console.WriteLine("______________________");
-                while (_isDealerTurn)
+                while (IsDealerTurn)
                 {
-                    Display.DealerTurn(_dealer);
-                    try
-                    {
-                        _dealer.Hit(Deck);
-                    }
-                    catch (DealerOver17Exception dealerOver17Exception)
-                    {
-                        Console.WriteLine(dealerOver17Exception.Message);
-                        _isDealerTurn = false;
-                        IsPlayingGame = false;
-                    }
+                    PlayDealersTurn();
                 }
 
                 FindWinner();
             }
         }
 
+        public void PlayDealersTurn()
+        {
+            Display.DealerTurn(_dealer);
+            try
+            {
+                _dealer.Hit(Deck);
+            }
+            catch (DealerOver17Exception dealerOver17Exception)
+            {
+                Console.WriteLine(dealerOver17Exception.Message);
+                IsPlayingGame = false;
+            }
+        }
+
+        public void PlayPlayersTurn()
+        {
+            if (_player.HasBusted())
+            {
+                IsPlayerTurn = false;
+                IsPlayingGame = false;
+            }
+            else if (_player.HasBlackJack())
+            {
+                IsPlayerTurn = false;
+                IsDealerTurn = true;
+            }
+            else
+            {
+                Display.PlayerPrompt(_player);
+                var response = _player.GetResponse();
+                if (response == Response.Stay)
+                {
+                    IsPlayerTurn = false;
+                    IsDealerTurn = true;
+                }
+                else
+                {
+                    PlayerHit();
+                }
+            }
+        }
+
         private void FindWinner()
         {
-            if (_player.HasBusted(_player)) //if player busts -> dealer wins
+            if (_player.HasBusted()) //if player busts -> dealer wins
             {
                 Display.DealerWins();
             }
-            else if (_dealer.DealerHand.CalculateHandSum() > 21) // if dealer busts -> player wins
+            else if (_dealer.HasBusted()) // if dealer busts -> player wins
             {
                 Display.PlayerWin();
             }
-            else if (_player.HasBlackJack(_player) && _dealer.DealerHand.CalculateHandSum() == 21
-            ) //if both get blackjack -> draw
+            else if (_player.HasBlackJack() && _dealer.HasBlackJack()) //if both get blackjack -> draw
             {
                 Display.Draw();
             }
             else //if neither gets blackjack or bust
             {
-                if (_player.PlayerHand.CalculateHandSum() > _dealer.DealerHand.CalculateHandSum() &&
-                    _dealer.DealerHand.CalculateHandSum() <= 21) //if player is closer to 21 -> player wins
+                if (_player.hand.CalculateScore() > _dealer.hand.CalculateScore()
+                ) //if player is closer to 21 -> player wins
                 {
                     Display.PlayerWin();
                 }
-                else if (_player.PlayerHand.CalculateHandSum() < _dealer.DealerHand.CalculateHandSum() &&
-                         _dealer.DealerHand.CalculateHandSum() <= 21) //if dealer is closer -> dealer wins
+                else if (_player.hand.CalculateScore() < _dealer.hand.CalculateScore()
+                ) //if dealer is closer -> dealer wins
                 {
                     Display.DealerWins();
                 }
@@ -112,8 +122,8 @@ namespace Blackjack
         private void PlayerHit()
         {
             var card = _dealer.DealCard(Deck.DeckOfCards);
-            _player.PlayerHand.CardsInHand.Add(card);
-            Display.PlayerHitCard(card);
+            _player.ReceiveCard(card);
+            Display.HitCard(card);
         }
     }
 }
