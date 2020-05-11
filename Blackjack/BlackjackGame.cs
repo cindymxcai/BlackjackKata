@@ -44,8 +44,10 @@ namespace Blackjack
                     PlayDealersTurn();
                 }
 
-                FindWinner();
             }
+            
+            FindWinner();
+
         }
 
         public void PlayDealersTurn()
@@ -58,6 +60,7 @@ namespace Blackjack
             catch (DealerOver17Exception dealerOver17Exception)
             {
                 Console.WriteLine(dealerOver17Exception.Message);
+                IsDealerTurn = false;
                 IsPlayingGame = false;
             }
         }
